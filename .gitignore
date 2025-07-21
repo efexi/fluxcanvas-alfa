@@ -12,3 +12,4 @@ dist/
 
 # Archivos generados
 generated/
+.DS_Store
