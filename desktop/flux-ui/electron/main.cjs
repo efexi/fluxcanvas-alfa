@@ -1,10 +1,11 @@
+const path = require('path')
 const { app, BrowserWindow } = require('electron')
 const { spawn } = require('child_process')
 
 let pyServer
 
 function createWindow() {
-    const pythonPath = '../../ai-services/.venv/bin/python' // Mac/Linux
+    const pythonPath = path.resolve(__dirname, '../../ai-services/.venv/bin/python') // Mac/Linux
     pyServer = spawn(pythonPath, ['../../ai-services/server.py'])
 
     pyServer.stdout.on('data', (data) => {
