@@ -1,12 +1,19 @@
-const path = require('path')
 const { app, BrowserWindow } = require('electron')
 const { spawn } = require('child_process')
+const path = require('path')
+const fs = require('fs')
 
 let pyServer
 
 function createWindow() {
     const aiServices = path.resolve(__dirname, '../../../ai-services')
+    const uploadFolder = path.resolve(aiServices, 'uploads')
     const pythonPath = path.resolve(aiServices, '.venv/bin/python') // Mac/Linux
+
+    if (!fs.existsSync(uploadFolder)) {
+        fs.mkdirSync(uploadFolder, { recursive: true })
+    }
+
     pyServer = spawn(pythonPath, [`${aiServices}/server.py`])
 
     pyServer.stdout.on('data', (data) => {
@@ -17,13 +24,17 @@ function createWindow() {
         console.error(`[PY ERROR]: ${data}`)
     })
 
+    pyServer.on('close', (code) => {
+        console.log(`Python server exited with code ${code}`)
+    })
+
     const win = new BrowserWindow({
-        width: 1000,
-        height: 700,
+        width: 800,
+        height: 600,
         webPreferences: {
+            nodeIntegration: true,
             contextIsolation: false,
-            nodeIntegration: true
-        }
+        },
     })
 
     win.loadURL('http://localhost:5173').then()
