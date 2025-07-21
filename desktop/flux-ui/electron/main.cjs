@@ -4,7 +4,8 @@ const { spawn } = require('child_process')
 let pyServer
 
 function createWindow() {
-    pyServer = spawn('python', ['../../ai-services/server.py'])
+    const pythonPath = '../../ai-services/.venv/bin/python' // Mac/Linux
+    pyServer = spawn(pythonPath, ['../../ai-services/server.py'])
 
     pyServer.stdout.on('data', (data) => {
         console.log(`[PY]: ${data}`)
