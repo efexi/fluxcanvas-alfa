@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "start": "electron electron/main.ts",
     "build": "vue-tsc -b && vite build",
     "preview": "vite preview"
   },
@@ -12,8 +13,11 @@
     "vue": "^3.5.17"
   },
   "devDependencies": {
+    "@types/electron": "^1.4.38",
+    "@types/node": "^24.0.15",
     "@vitejs/plugin-vue": "^6.0.0",
     "@vue/tsconfig": "^0.7.0",
+    "electron": "^37.2.3",
     "typescript": "~5.8.3",
     "vite": "^7.0.4",
     "vue-tsc": "^2.2.12"
