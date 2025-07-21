@@ -15,10 +15,10 @@ const imageUrl = ref('')
 
 async function generateImage() {
   try {
-    const res = await fetch('http://127.0.0.1:5000/generate-image')
+    const res = await fetch('http://127.0.0.1:8000/generate-image')
     const data = await res.json()
     message.value = data.message
-    imageUrl.value = `http://127.0.0.1:5000/generated/image.png?timestamp=${Date.now()}`
+    imageUrl.value = `http://127.0.0.1:8000/generated/image.png?timestamp=${Date.now()}`
   } catch (error) {
     message.value = 'Error al llamar al backend'
     console.error(error)

@@ -9,7 +9,8 @@ app = FastAPI()
 app.mount("/generated", StaticFiles(directory="../generated"), name="generated")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -22,4 +23,4 @@ def generate_image():
     return {"status": "ok", "message": "Imagen generada"}
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="127.0.0.1", port=5000)
+    uvicorn.run(app, host="127.0.0.1", port=8000)
