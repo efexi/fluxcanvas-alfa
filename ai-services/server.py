@@ -69,14 +69,36 @@ async def segmentar(file: UploadFile = File(...)):
     segmented = np.zeros_like(np_image)
     segmented[person_mask == 255] = np_image[person_mask == 255]
 
-    dominant = get_dominant_color(segmented)
-    hex_color = '#%02x%02x%02x' % dominant
+    upper_mask = person_mask[:256, :]
+    lower_mask = person_mask[256:, :]
+
+    upper_segmented = np.zeros_like(np_image[:256])
+    lower_segmented = np.zeros_like(np_image[256:])
+
+    upper_segmented[upper_mask == 255] = np_image[:256][upper_mask == 255]
+    lower_segmented[lower_mask == 255] = np_image[256:][lower_mask == 255]
+
+    upper_color = get_dominant_color(upper_segmented)
+    lower_color = get_dominant_color(lower_segmented)
+
+    upper_hex = '#%02x%02x%02x' % upper_color
+    lower_hex = '#%02x%02x%02x' % lower_color
 
     segmented_pil = PILImage.fromarray(segmented)
     segmented_pil.save(SEGMENTED_IMAGE_PATH)
 
-    dominant_tuple = tuple(int(c) for c in dominant)
-    return {"part": "persona", "dominant_rgb": dominant_tuple, "hex": hex_color}
+    return {
+        "upper_body": {
+            "label": "shirt",
+            "color_rgb": [int(c) for c in upper_color],
+            "color_hex": upper_hex
+        },
+        "lower_body": {
+            "label": "pants",
+            "color_rgb": [int(c) for c in lower_color],
+            "color_hex": lower_hex
+        }
+    }
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8000)
