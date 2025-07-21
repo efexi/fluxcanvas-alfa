@@ -1,8 +1,7 @@
-import { app, BrowserWindow } from 'electron'
-import { spawn } from 'child_process'
-import * as path from 'path'
+const { app, BrowserWindow } = require('electron')
+const { spawn } = require('child_process')
 
-let pyServer: any
+let pyServer
 
 function createWindow() {
     pyServer = spawn('python', ['../../ai-services/server.py'])
