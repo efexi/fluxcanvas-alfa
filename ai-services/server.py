@@ -75,7 +75,8 @@ async def segmentar(file: UploadFile = File(...)):
     segmented_pil = PILImage.fromarray(segmented)
     segmented_pil.save(SEGMENTED_IMAGE_PATH)
 
-    return {"part": "persona", "dominant_rgb": dominant, "hex": hex_color}
+    dominant_tuple = tuple(int(c) for c in dominant)
+    return {"part": "persona", "dominant_rgb": dominant_tuple, "hex": hex_color}
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8000)
