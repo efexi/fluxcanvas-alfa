@@ -1,0 +1,5 @@
+assets/dependencies/**/*.js
+views/**/*.ejs
+public/src/i18n/en.js
+public/src/i18n/es.js
+app/views/face3d/fd.js

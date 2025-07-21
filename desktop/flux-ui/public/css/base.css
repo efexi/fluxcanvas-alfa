@@ -1,0 +1,66 @@
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  color: #e8eaed;
+  background: #122F4F;
+  font-family: Roboto, sans-serif;
+  overflow: hidden;
+}
+
+#bootloader-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  font-family: Roboto, sans-serif;
+  background: #122F4F;
+  background-size: cover;
+  flex-direction: column;
+  font-weight: 700;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  transition-delay: 0.3s;
+  transition-duration: 0.3s;
+  z-index: 1000;
+}
+
+#bootloader-container .logo-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+#bootloader-container .logo-container > img {
+  height: 20vmin;
+  position: absolute;
+  width: 20vmin;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  transform-style: preserve-3d;
+  animation-name: loaderRotate;
+  animation-duration: 2s;
+  animation-timing-function: ease;
+  animation-iteration-count: infinite;
+}
+
+#bootloader-container.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+@keyframes loaderRotate {
+  0% {
+    transform: rotateX(0) rotateY(0);
+  }
+  50% {
+    transform: rotateX(15deg) rotateY(360deg);
+  }
+  100% {
+    transform: rotateX(0) rotateY(0);
+  }
+}

@@ -1,0 +1,4 @@
+public/src/i18n/en.js
+public/src/i18n/es.js
+#/src/**/*
+app/views/face3d/fd.js
