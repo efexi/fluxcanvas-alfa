@@ -63,10 +63,4 @@ img {
   max-width: 100%;
   max-height: 300px;
 }
-.shirt {
-  color: #645953;
-}
-.pants {
-  color: #656162;
-}
 </style>

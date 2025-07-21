@@ -40,7 +40,7 @@ def get_dominant_color(image_array):
     pixels = image_array.reshape(-1, 3)
     pixels = pixels[(pixels[:,0] != 0) | (pixels[:,1] != 0) | (pixels[:,2] != 0)]
     if len(pixels) == 0:
-        return (0, 0, 0)
+        return 0, 0, 0
     dominant = np.mean(pixels, axis=0).astype(int)
     return tuple(dominant)
 
@@ -53,6 +53,8 @@ preprocess = transforms.Compose([
                         std=[0.229, 0.224, 0.225]),
 ])
 
+
+# noinspection PyTypeChecker,PyUnresolvedReferences
 @app.post("/segmentar")
 async def segmentar(file: UploadFile = File(...)):
     from PIL import Image as PILImage
