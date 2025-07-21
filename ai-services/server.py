@@ -3,9 +3,10 @@ from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 from PIL import Image
 import os
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
-
+app.mount("/generated", StaticFiles(directory="../generated"), name="generated")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
